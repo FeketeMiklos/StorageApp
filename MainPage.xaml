@@ -3,51 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StorageApp.MainPage">
 
-    <VerticalStackLayout Padding="10" Spacing="10">
-        <Label Text="Products in store"
-               FontSize="30"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"/>
+    <Shell.TitleView>
+        <Grid>
+            <Label Text="Products in store" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="25" FontAttributes="Bold"/>
+        </Grid>
+    </Shell.TitleView>
 
-        <CollectionView x:Name="ProductsList">
+    <Grid Padding="10" RowDefinitions="Auto,*,Auto" RowSpacing="10">
+
+        <CollectionView x:Name="ProductsList" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="AliceBlue"
-                            Stroke="#B8D4E8"
-                            StrokeThickness="1"
-                            Padding="10"
-                            Margin="10,5"
-                            StrokeShape="RoundRectangle 12"
-                            x:Name="BorderStyle">
-                        
+                        Stroke="#B8D4E8"
+                        StrokeThickness="1"
+                        Padding="10"
+                        Margin="10,5"
+                        StrokeShape="RoundRectangle 12"
+                        x:Name="BorderStyle">
+
                         <Border.Triggers>
                             <DataTrigger TargetType="Border"
-                                 Binding="{Binding Quantity}"
-                                 Value="0">
+                                Binding="{Binding Quantity}"
+                                Value="0">
                                 <Setter Property="BackgroundColor" Value="#fa8072" />
                             </DataTrigger>
                         </Border.Triggers>
-                        
+
                         <VerticalStackLayout Padding="10" Spacing="4">
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </VerticalStackLayout.GestureRecognizers>
+
                             <HorizontalStackLayout Spacing="10">
                                 <Label Text="{Binding Name}"
-                                       FontSize="25"
-                                       FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    FontSize="25"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
 
-                                <Label Text="{Binding Barcode, StringFormat='#{0}'}" FontSize="25" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                <Label Text="{Binding Barcode, StringFormat='#{0}'}"
+                                    FontSize="25"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Spacing="10">
-                                <Label Text="{Binding Price, StringFormat='Price: {0:F2}'}" FontSize="18"/>
+                                <Label Text="{Binding Price, StringFormat='Price: {0:F2}$'}" FontSize="18"/>
 
                                 <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" FontSize="18"/>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
-                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
 
+        <Button Grid.Row="2" Clicked="New_Clicked" Text="Add New" FontSize="25" BackgroundColor="Crimson" TextColor="White" HorizontalOptions="Fill" VerticalOptions="End"/>
+    </Grid>
 </ContentPage>
