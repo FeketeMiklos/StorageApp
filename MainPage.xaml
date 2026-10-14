@@ -11,6 +11,36 @@
 
     <Grid Padding="10" RowDefinitions="Auto,*,Auto" RowSpacing="10">
 
+        <Grid RowDefinitions="*,*"
+            RowSpacing="10">
+
+            <Border Grid.Row="0"
+                HeightRequest="50"
+                VerticalOptions="Center">
+
+                <Entry x:Name="searchName"
+                    Margin="10"
+                    Placeholder="Search by product name"
+                    FontSize="18"
+                    HeightRequest="35"
+                    TextChanged="OnNameSearchTextChanged" 
+                />
+            </Border>
+
+            <Border Grid.Row="1"
+                HeightRequest="50"
+                VerticalOptions="Center">
+
+                <Entry x:Name="searchCode"
+                    Margin="10"
+                    Placeholder="Search by product barcode"
+                    FontSize="18"
+                    HeightRequest="35" 
+                    TextChanged="OnBarcodeSearchTextChanged" 
+                />
+            </Border>
+        </Grid>
+
         <CollectionView x:Name="ProductsList" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -34,7 +64,7 @@
                             <VerticalStackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                             </VerticalStackLayout.GestureRecognizers>
-
+                         
                             <HorizontalStackLayout Spacing="10">
                                 <Label Text="{Binding Name}"
                                     FontSize="25"

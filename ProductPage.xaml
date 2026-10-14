@@ -101,7 +101,7 @@
         </Grid>
 
         <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
-            <Button Grid.Column="0" Clicked="Cancel_Clicked" Text="Cancel" FontSize="25" BackgroundColor="OrangeRed"></Button>
+            <Button x:Name="deleteBtn" Grid.Column="0" Clicked="Delete_Clicked" Text="Delete" FontSize="25" BackgroundColor="OrangeRed"></Button>
             <Button Grid.Column="1" Clicked="Save_Clicked" Text="Save" FontSize="25" BackgroundColor="ForestGreen"></Button>
         </Grid>
 

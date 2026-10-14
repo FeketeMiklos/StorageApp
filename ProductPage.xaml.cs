@@ -11,7 +11,7 @@ public partial class ProductPage : ContentPage
 		InitializeComponent();
         _database = new Database();
         Title = "Add new product";
-
+        deleteBtn.Text = "Cancel";
     }
 
     public ProductPage(Product product)
@@ -19,6 +19,7 @@ public partial class ProductPage : ContentPage
         InitializeComponent();
         _database = new Database();
         Title = "Edit product data";
+        deleteBtn.Text = "Delete";
 
         productFromMain = product;
         productName.Text = product.Name;
@@ -28,9 +29,21 @@ public partial class ProductPage : ContentPage
 
     }
 
-    private async void Cancel_Clicked(object sender, EventArgs e)
+    private async void Delete_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        if (productFromMain == null)
+        {
+            await Navigation.PopAsync();
+        }
+        else 
+        {
+            bool delete = await DisplayAlertAsync("Delete", "Are you sure you want to delete this product?", "Delete", "Cancel");
+            if (delete)
+            {
+                await _database.DeleteProductAsync(productFromMain);
+                await Navigation.PopAsync();
+            }
+        }
     }
 
     private async void Save_Clicked(object sender, EventArgs e)
