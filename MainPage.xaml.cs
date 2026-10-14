@@ -2,23 +2,20 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
+        private readonly Database _database;
         public MainPage()
         {
             InitializeComponent();
+            _database = new Database();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            count++;
+            base.OnAppearing();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            var products = await _database.GetProductsAsync();
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            ProductsList.ItemsSource = products;
         }
     }
 }
